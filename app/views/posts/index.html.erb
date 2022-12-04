@@ -11,6 +11,7 @@
     <td><%= post.content %></td>
     <td><%= post.user.name %></td>
     <td><%= link_to '詳細を確認する', post_path(post.id) %></td>
+    <td><%= link_to "ブログを編集する", edit_post_path(post.id) %></td>
   </tr>
 <% end %>
 </table>
