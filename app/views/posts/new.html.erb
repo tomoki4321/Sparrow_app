@@ -16,7 +16,7 @@
         <h2 class="logo-img mx-auto"></h2>
         <h1 class="text-secondary">新規投稿</h1>
       </div>
-      <%=form_with(model:@post,local:true)do |f|%>
+      <%=form_with(model:@post,local:true,url: choose_new_or_edit)do |f|%>
         <div class="form-group">
           <%= f.text_field :content, autofocus: true, placeholder: "コンテンツ", class: "form-control" %>
         </div>

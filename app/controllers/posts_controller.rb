@@ -9,10 +9,14 @@ class PostsController < ApplicationController
   
   def create
     @post=current_user.posts.build(post_params)
-    if @post.save
-      redirect_to posts_path notice: "ブログを作成しました！"
-    else
+    if params[:back]
       render :new
+    else
+      if @post.save
+        redirect_to posts_path flash[:notice]= "ブログを作成しました！"
+      else
+        render :new
+      end
     end
   end
 
@@ -27,7 +31,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to posts_path, notice: "ブログを編集しました！"
+      redirect_to posts_path, flash[:notice]= "ブログを編集しました！"
     else
       render :edit
     end
@@ -36,7 +40,12 @@ class PostsController < ApplicationController
   def destroy
     @post=Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path, notice:"ブログを削除しました！"
+    redirect_to posts_path, flash[:notice]="ブログを削除しました！"
+  end
+
+  def confirm
+    @post=current_user.posts.build(post_params)
+    render :new if @post.invalid?
   end
   private
   
