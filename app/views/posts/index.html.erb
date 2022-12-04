@@ -1,0 +1,15 @@
+<h1>ブログ一覧</h1>
+
+<table>
+  <tr>
+    <th>内容</th>
+    <th>ユーザー</th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.content %></td>
+    <td><%= post.user.name %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-
+    @posts = Post.all
   end
 
   def new
@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post=Post.new(post_params)
+    @post=current_user.posts.build(post_params)
     if @post.save
       redirect_to posts_path notice: "ブログを作成しました！"
     else
