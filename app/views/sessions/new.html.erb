@@ -1,38 +1,18 @@
-<%if @user.errors.any?%>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
-    <ul>
-      <%=@user.errors.full_messages.each do |message|%>
-        <li><%=message%></li>
-      <%end%>
-    </ul>
-  </div>
-<%end%>
 <div class="main">
   <div class="card devise-card">
     <div class="form-wrap">
       <div class="form-group text-center">
         <h2 class="logo-img mx-auto"></h2>
-        <h1 class="text-secondary">新規作成</h1>
+        <h1 class="text-secondary">ログイン</h1>
         <p class="text-secondary">友達の写真や動画をチェックしよう</p>
       </div>
-      <%=form_with(model:@user,local:true)do |f|%>
+      <%=form_with(scope: :session,url: sessions_path,local: true)do |f|%>
         <div class="form-group">
           <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス", class: "form-control" %>
         </div>
-
-        <div class="form-group">
-          <%= f.text_field :name, autofocus: true, placeholder: "フルネーム", class: "form-control" %>
-        </div>
-
         <div class="form-group">
           <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード", class: "form-control" %>
         </div>
-
-        <div class="form-group">
-          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "パスワードの確認", class: "form-control" %>
-        </div>
-
         <div class="actions">
           <%= f.submit "登録する", class: "btn btn-primary w-100" %>
         </div>
@@ -41,8 +21,8 @@
       <br>
 
       <p class="devise-link">
-        アカウントをお持ちですか？
-        <%= link_to "サインインする", new_session_path %>
+        アカウントがない？
+        <%= link_to "アカウント作成する", new_user_path %>
       </p>
     </div>
   </div>
@@ -100,3 +80,4 @@ footer {
 }
 
 </style>
+
