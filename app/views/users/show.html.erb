@@ -1,7 +1,7 @@
 <div class="profile-wrap">
   <div class="row">
     <div class="col-md-4 text-center">
-      <%= image_tag avatar_url(@user), class: "round-img" %>
+      <%= image_tag(@user.image.url, class: "round-img") if @user.image && @user.image.url %>
     </div>
     <div class="col-md-8">
       <div class="row">
