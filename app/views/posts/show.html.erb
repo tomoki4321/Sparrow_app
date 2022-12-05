@@ -1,3 +1,10 @@
 <h1>ブログ詳細画面</h1>
 <p>内容: <%= @post.content %></p>
 <%= image_tag(@post.picture.url, class: "round-img") if @post.picture && @post.picture.url %>
+<% unless @post.user_id == current_user.id %>
+  <% if @favorite.present? %>
+    <p><%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %></p>
+  <% else %>
+    <p><%= link_to 'お気に入りする', favorites_path(post_id: @post.id), method: :post, class: 'btn btn-primary' %><p>
+  <% end %>
+<% end %>

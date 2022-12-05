@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   def show
     @post=Post.find(params[:id])
+    @favorite = current_user.favorites.find_by(post_id: @post.id)
   end
 
   def edit
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to posts_path, flash[:notice]= "ブログを編集しました！"
+      redirect_to posts_path flash[:notice]= "ブログを編集しました！"
     else
       render :edit
     end
@@ -40,7 +41,7 @@ class PostsController < ApplicationController
   def destroy
     @post=Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path, flash[:notice]="ブログを削除しました！"
+    redirect_to posts_path flash[:notice]= "ブログを削除しました！"
   end
 
   def confirm
@@ -48,7 +49,7 @@ class PostsController < ApplicationController
     render :new if @post.invalid?
   end
   private
-  
+
   def post_params
     params.require(:post).permit(:content,:picture,:picture_cache)
   end
