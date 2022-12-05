@@ -2,4 +2,4 @@
 
 <h4>name: <%= @post.user.name %></h4>
 <p>content: <%= @post.content %></p>
-<p><%= image_tag("https://mighty-bayou-13982.herokuapp.com/"+@post.picture.url, class: "round-img") if @post.picture && @post.picture.url %></p>
+<p><%= image_tag("https://mighty-bayou-13982.herokuapp.com"+@post.picture.url, class: "round-img") if @post.picture && @post.picture.url %></p>
