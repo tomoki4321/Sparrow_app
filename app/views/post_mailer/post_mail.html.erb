@@ -1,6 +1,4 @@
 <h1>投稿が完了しました！</h1>
-
 <h4>name: <%= @post.user.name %></h4>
-
 <p>content: <%= @post.content %></p>
 <%= image_tag(@post.picture.url, class: "round-img") if @post.picture && @post.picture.url %>
