@@ -3,15 +3,36 @@
   <tr>
     <th>内容</th>
     <th>ユーザー</th>
+    <th>画像</th>
   </tr>
 
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.content %></td>
     <td><%= post.user.name %></td>
+    <td><%= image_tag(post.picture.url, class: "round-img") if post.picture && post.picture.url %></td>
     <td><%= link_to '詳細を確認する', post_path(post.id) %></td>
-    <td><%= link_to "ブログを編集する", edit_post_path(post.id) %></td>
-    <td><%= link_to 'ブログを削除する', post_path(post.id), method: :delete,data: { confirm: '本当に削除していいですか？'} %></td>
+    <%if post.user.id == current_user.id%>
+      <td><%= link_to "ブログを編集する", edit_post_path(post.id) %></td>
+      <td><%= link_to 'ブログを削除する', post_path(post.id), method: :delete,data: { confirm: '本当に削除していいですか？'} %></td>
+    <%end%>
   </tr>
 <% end %>
 </table>
+
+<style>
+  th{
+    text-align:center;
+    border: solid 2px #080808;
+  }
+  table {
+    border: solid 2px #080808;
+  }
+  tr {
+    border: solid 2px #080808;
+  }
+  td{
+    border: solid 2px #080808;
+    text-align:center;
+  }
+</style>

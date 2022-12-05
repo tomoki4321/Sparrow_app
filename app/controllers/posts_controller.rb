@@ -13,6 +13,7 @@ class PostsController < ApplicationController
       render :new
     else
       if @post.save
+        PostMailer.post_mail(@post).deliver
         redirect_to posts_path flash[:notice]= "ブログを作成しました！"
       else
         render :new
@@ -27,6 +28,11 @@ class PostsController < ApplicationController
 
   def edit
     @post=Post.find(params[:id])
+    if @post.user == current_user
+      render :edit
+    else
+      redirect_to posts_path
+    end
   end
 
   def update
